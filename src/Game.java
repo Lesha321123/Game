@@ -6,13 +6,17 @@ public class Game {
         Player player = new Player();
         Enemy enemy = new Enemy();
 
-        System.out.println("Введите свое имя");
+        print("Введите свое имя");
         player.setName(enterString());
-        System.out.println("Введите имя врага");
+        print("Введите имя врага");
         enemy.setName(enterString());
         welcome(player, enemy);
 
-        
+        print("Бросаем кубик: " + diceRoll(20));
+
+
+
+
 
     }
 
@@ -34,6 +38,14 @@ public class Game {
         System.out.println();
     }
 
+    public static int diceRoll(int dice){
+        double roll = Math.random() * dice;
+        return (int) roll;
+    }
+
+    public static void print(String text){
+        System.out.println(text);
+    }
 
 
 
