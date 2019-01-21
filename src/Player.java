@@ -1,7 +1,7 @@
 public class Player {
 
     private String name;
-    private int strength = 20;
+    private int strength = 1;
     private int health = 100;
 
     Player (){

@@ -12,7 +12,8 @@ public class Game {
         enemy.setName(enterString());
         welcome(player, enemy);
 
-        print("Бросаем кубик: " + diceRoll(20));
+        fight(player,enemy);
+        fight(player,enemy);
 
 
 
@@ -41,6 +42,13 @@ public class Game {
     public static int diceRoll(int dice){
         double roll = Math.random() * dice;
         return (int) roll;
+    }
+
+    public static void fight(Player player, Enemy enemy){
+        int damage = (player.getStrength() * diceRoll(20));
+        print("урон: " + damage);
+        enemy.setHealth(enemy.getHealth() - damage);
+        print("Здоровье врага: " + enemy.getHealth());
     }
 
     public static void print(String text){
