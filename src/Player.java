@@ -1,6 +1,6 @@
 public class Player {
 
-    public String name;
+    private String name;
     private int strength = 20;
     private int health = 100;
 
