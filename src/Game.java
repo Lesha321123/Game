@@ -6,14 +6,30 @@ public class Game {
         Player player = new Player();
         Enemy enemy = new Enemy();
 
-        print("Введите свое имя");
-        player.setName(enterString());
-        print("Введите имя врага");
-        enemy.setName(enterString());
         welcome(player, enemy);
 
-        fight(player,enemy);
-        fight(player,enemy);
+        while (enemy.getHealth() > 0 || player.getHealth() > 0){
+            fightPlayerVsEnemy(player,enemy);
+            if (enemy.getHealth() <= 0){
+                if (enemy.getHealth() <= 0) {
+                    printGreen("Враг мертв!");
+                    break;
+                }
+                break;
+            }
+
+            fightEnemyVsPlaer(player,enemy);
+
+            if (player.getHealth() <= 0){
+                if (player.getHealth() <= 0){
+                    printRed("Ты мертв!");
+                    break;
+                }
+                break;
+            }
+        }
+
+
 
 
 
@@ -29,13 +45,13 @@ public class Game {
     }
 
     public static void welcome(Player player, Enemy enemy){
-        System.out.println("Мое имя: " + player.getName());
-        System.out.println("Моя сила: " + player.getStrength());
-        System.out.println("Мое здоровье: " + player.getHealth());
+        printGreen("Твое имя: " + player.getName());
+        printGreen("Твоя сила: " + player.getStrength());
+        printGreen("Твое здоровье: " + player.getHealth());
         System.out.println();
-        System.out.println("Имя врага: " + enemy.getName());
-        System.out.println("Сила врага: " + enemy.getStrength());
-        System.out.println("Его здоровье: " + enemy.getHealth());
+        printRed("Имя врага: " + enemy.getName());
+        printRed("Сила врага: " + enemy.getStrength());
+        printRed("Его здоровье: " + enemy.getHealth());
         System.out.println();
     }
 
@@ -44,15 +60,26 @@ public class Game {
         return (int) roll;
     }
 
-    public static void fight(Player player, Enemy enemy){
-        int damage = (player.getStrength() * diceRoll(20));
-        print("урон: " + damage);
+    public static void fightPlayerVsEnemy(Player player, Enemy enemy){
+        int damage = (player.getStrength() * diceRoll(6));
+        printGreen("Ты наносишь урон врагу: " + damage);
         enemy.setHealth(enemy.getHealth() - damage);
-        print("Здоровье врага: " + enemy.getHealth());
+        printRed("Здоровье врага: " + enemy.getHealth());
     }
 
-    public static void print(String text){
-        System.out.println(text);
+    public static void fightEnemyVsPlaer(Player player, Enemy enemy){
+        int damage = (enemy.getStrength() * diceRoll(6));
+        printRed("Враг наносит тебе урон: " +  damage);
+        player.setHealth(player.getHealth() - damage);
+        printGreen("Твое здоровье: " + player.getHealth());
+    }
+
+    public static void printRed(String text){
+        System.out.println("\u001B[31m" + text + "\u001B[0m");
+    }
+
+    public static void printGreen(String text){
+        System.out.println("\u001B[32m" + text + "\u001B[0m");
     }
 
 

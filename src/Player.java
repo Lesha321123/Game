@@ -1,8 +1,8 @@
 public class Player {
 
-    private String name;
-    private int strength = 1;
-    private int health = 100;
+    private String name = "Игрок";
+    private int strength = 2;
+    private int health = 80;
 
     Player (){
     }

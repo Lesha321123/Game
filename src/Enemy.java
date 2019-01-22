@@ -1,7 +1,7 @@
 public class Enemy {
 
-    private String name;
-    private int strength = 4;
+    private String name = "Враг";
+    private int strength = 2;
     private int health = 70;
 
     Enemy (){
