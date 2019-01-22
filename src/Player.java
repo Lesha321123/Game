@@ -1,11 +1,23 @@
 public class Player {
 
+
     private String name = "Игрок";
     private int strength = 2;
     private int health = 80;
 
     Player (){
     }
+
+    public int rollDice(int limit){
+        System.out.println("Бросаем кубик");
+        int result = (int) ( Math.random() * limit);
+        System.out.println("Выпало: " + "\u001B[34m" + result + "\u001B[0m");
+        return result;
+    }
+
+
+
+
 
     public String getName() {
         return name;
