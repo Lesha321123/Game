@@ -1,16 +1,44 @@
 import java.util.Scanner;
 
 public class Game {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+
+        // Создание персонажа
         Scanner in = new Scanner(System.in);
-
-        Player player = new Player();
+        System.out.println("Выбери расу");
+        System.out.println("1. Человек");
+        System.out.println("2. Гном");
+        System.out.println("3. Эльф");
+        Player player = null;
+        int choice = in.nextInt();
+        switch (choice){
+            case 1:
+                player = new Player("Человек",4,80);
+                System.out.println("Выбрано: человек");
+                break;
+            case 2:
+                player = new Player("Гном",7,120);
+                System.out.println("Выбрано: гном");
+                break;
+            case 3:
+                player = new Player("Эльф",5,100);
+                System.out.println("Выбрано: эльф");
+                break;
+            default:
+                System.out.println("Значение должно быть от 1 до 3");
+                break;
+        }
+        System.out.println("Выбери имя персонажа");
+        player.setName(enterText());
+        System.out.println("Имя персонажа: " + player.getName());
+        player.welcome();
+        
+        // Создание врага
         Enemy enemy = new Enemy();
-
-        welcome(player, enemy);
-        player.rollDice(4);
-
-        fight(player, enemy);
+        // Движение
+         player.go();
+         // Автобой
+         fight(player, enemy);
 
 
 
@@ -26,17 +54,11 @@ public class Game {
 
 
 
+    public static void createCharacter(Player player){
 
-    public static void welcome(Player player, Enemy enemy){
-        print(blue("Твое имя: ") + green(player.getName()));
-        print(blue("Твоя сила: ") + green(Integer.toString(player.getStrength())));
-        print(blue("Твое здоровье: ") + green(Integer.toString(player.getHealth())));
-        System.out.println();
-        print(blue("Имя врага: ") + red(enemy.getName()));
-        print(blue("Сила врага: ") + red(Integer.toString(enemy.getStrength())));
-        print(blue("Его здоровье: ") + red(Integer.toString(enemy.getHealth())));
-        System.out.println();
     }
+
+
 
     public static int random(int limit){
         double roll = Math.random() * limit;
@@ -97,6 +119,18 @@ public class Game {
 
     public static void print(String text){
         System.out.println(text);
+    }
+
+    public static String enterText(){
+        Scanner in = new Scanner(System.in);
+        String text = in.nextLine();
+        return text;
+    }
+
+    public static int enterNumber(){
+        Scanner in = new Scanner(System.in);
+        int number = in.nextInt();
+        return number;
     }
 
 
