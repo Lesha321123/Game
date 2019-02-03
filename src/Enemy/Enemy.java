@@ -1,10 +1,12 @@
+package Enemy;
+
 public class Enemy {
 
     private String name = "Враг";
     private int strength = 2;
     private int health = 70;
 
-    Enemy (){
+    public Enemy (){
     }
 
     public String getName() {

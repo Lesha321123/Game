@@ -1,42 +1,65 @@
-import java.util.Scanner;
+import Enemy.Enemy;
+import Player.Player;
+import Player.Human;
+import Player.Dwarf;
+import Player.Elf;
+
+import java.util.*;
+
 
 public class Game {
-    public static void main(String[] args)  {
+    public static void main(String[] args)   {
+
+        // Создание мира
+        World world = new World();
+        world.createWorld();
 
         // Создание персонажа
         Scanner in = new Scanner(System.in);
-        System.out.println("Выбери расу");
-        System.out.println("1. Человек");
-        System.out.println("2. Гном");
-        System.out.println("3. Эльф");
+
+        print(blue("Выбери расу"));
+        print(blue("Человек: 1"));
+        print(blue("Гном:    2"));
+        print(blue("Эльф:    3"));
         Player player = null;
-        int choice = in.nextInt();
-        switch (choice){
-            case 1:
-                player = new Player("Человек",4,80);
-                System.out.println("Выбрано: человек");
-                break;
-            case 2:
-                player = new Player("Гном",7,120);
-                System.out.println("Выбрано: гном");
-                break;
-            case 3:
-                player = new Player("Эльф",5,100);
-                System.out.println("Выбрано: эльф");
-                break;
-            default:
-                System.out.println("Значение должно быть от 1 до 3");
-                break;
+        while (player == null) {
+            int choice = 0;
+            try {
+                choice = in.nextInt();
+            }
+
+            catch (Exception e)
+            {
+                print("Нужно ввести число от 1 до 3");
+            }
+                switch (choice) {
+                    case 1:
+                        player = new Human("Человек", 4, 80);
+                        print("Выбрано: человек");
+                        break;
+                    case 2:
+                        player = new Dwarf("Гном", 7, 120);
+                        print("Выбрано: гном");
+                        break;
+                    case 3:
+                        player = new Elf("Эльф", 5, 100);
+                        print("Выбрано: эльф");
+                        break;
+                    default:
+                        print("Значение должно быть от 1 до 3");
+                        continue;
+                }
+
         }
-        System.out.println("Выбери имя персонажа");
+
+        System.out.println(blue("Введи имя персонажа"));
         player.setName(enterText());
-        System.out.println("Имя персонажа: " + player.getName());
         player.welcome();
-        
+
         // Создание врага
         Enemy enemy = new Enemy();
         // Движение
-         player.go();
+         player.go(5);
          // Автобой
          fight(player, enemy);
 
@@ -52,11 +75,6 @@ public class Game {
 
     }
 
-
-
-    public static void createCharacter(Player player){
-
-    }
 
 
 
@@ -80,6 +98,8 @@ public class Game {
     }
 
     public static void fight(Player player, Enemy enemy){
+        System.out.println(blue("Твое здоровье: ")  + green(Integer.toString(player.getHealth())));
+        System.out.println(blue("Здоровье врага: ")  + red(Integer.toString(enemy.getHealth())));
         while (enemy.getHealth() > 0 || player.getHealth() > 0){
             playerBeatsEnemy(player,enemy);
             if (enemy.getHealth() <= 0){
