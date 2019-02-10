@@ -1,3 +1,5 @@
+package Game;
+
 import Enemy.Enemy;
 import Player.Player;
 import Player.Human;
@@ -10,9 +12,7 @@ import java.util.*;
 public class Game {
     public static void main(String[] args)   {
 
-        // Создание мира
-        World world = new World();
-        world.createWorld();
+
 
         // Создание персонажа
         Scanner in = new Scanner(System.in);
@@ -30,7 +30,7 @@ public class Game {
 
             catch (Exception e)
             {
-                print("Нужно ввести число от 1 до 3");
+                red("Нужно ввести число от 1 до 3");
             }
                 switch (choice) {
                     case 1:
@@ -56,12 +56,15 @@ public class Game {
         player.setName(enterText());
         player.welcome();
 
+        // Создание мира
+        Level level = new Level(random(10));
+        // Движение
+        player.go(5, level);
         // Создание врага
         Enemy enemy = new Enemy();
-        // Движение
-         player.go(5);
+
          // Автобой
-         fight(player, enemy);
+         //fight(player, enemy);
 
 
 

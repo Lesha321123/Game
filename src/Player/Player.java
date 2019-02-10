@@ -1,6 +1,13 @@
 package Player;
 
 
+import Game.Game;
+import Game.Level;
+
+import static Game.Game.blue;
+import  static Game.Game.print;
+
+
 public abstract class Player {
 
 
@@ -18,23 +25,28 @@ public abstract class Player {
     }
 
     public void welcome(){
-        System.out.println((("Твое имя: ") + (getName())));
-        System.out.println(("Твоя раса: ") + (getRace()));
-        System.out.println(("Твоя сила: ") + (Integer.toString(getStrength())));
-        System.out.println(("Твое здоровье: ") + (Integer.toString(getHealth())));
+        print(blue("Твое имя: ") + (getName()));
+        print(blue("Твоя раса: ") + (getRace()));
+        print(blue("Твоя сила: ") + (Integer.toString(getStrength())));
+        print(blue("Твое здоровье: ") + (Integer.toString(getHealth())));
         System.out.println();
     }
 
     public static int rollDice(int limit){
-        System.out.println(("Бросаем кубик"));
+        blue(("Бросаем кубик"));
         int result = (int) (( Math.random() * limit) + 1);
-        System.out.println(("Выпало: ") + "\u001B[34m" + result + "\u001B[0m");
+        blue(("Выпало: ") + "\u001B[34m" + result + "\u001B[0m");
         return result;
     }
 
-    public static int go(int limit){
+    public static int go(int limit, Level level){
         int step = rollDice(limit);
-        System.out.println(("Вы прошли на ") + step + (" клеток"));
+        print(blue(("Вы прошли на ") + step + (" клеток")));
+        if (step > level.getEnemyLocation()){
+            print(blue("Вы встретили врага"));
+        } else {
+            print(blue("Ничего не происходит"));
+        }
         return step;
     }
 
