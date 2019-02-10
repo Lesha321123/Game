@@ -59,12 +59,12 @@ public class Game {
         // Создание мира
         Level level = new Level(random(10));
         // Движение
-        player.go(5, level);
+        player.go(10, level);
         // Создание врага
         Enemy enemy = new Enemy();
 
-         // Автобой
-         //fight(player, enemy);
+         //Автобой
+         fight(player, enemy);
 
 
 
