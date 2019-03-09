@@ -64,17 +64,6 @@ public class Game {
 
          //Автобой
          fight(player, enemy);
-
-
-
-
-
-
-
-
-
-
-
     }
 
 
