@@ -15,10 +15,10 @@ public class Game {
         // Создание персонажа
         Scanner in = new Scanner(System.in);
 
-        print(blue("Выбери расу"));
-        print(blue("Человек: 1"));
-        print(blue("Гном:    2"));
-        print(blue("Эльф:    3"));
+        print(blueText("Выбери расу"));
+        print(blueText("Человек: 1"));
+        print(blueText("Гном:    2"));
+        print(blueText("Эльф:    3"));
         Player player = null;
         while (player == null) {
             int choice = 0;
@@ -28,7 +28,7 @@ public class Game {
 
             catch (Exception e)
             {
-                print(red("Нужно ввести число от 1 до 3"));
+                print(redText("Нужно ввести число от 1 до 3"));
 
             }
                 switch (choice) {
@@ -45,18 +45,18 @@ public class Game {
                         print("Выбрано: эльф");
                         break;
                     default:
-                        print(red("Значение должно быть от 1 до 3"));
+                        print(redText("Значение должно быть от 1 до 3"));
                         continue;
                 }
 
         }
 
-        print(blue("Введи имя персонажа"));
+        print(blueText("Введи имя персонажа"));
         player.setName(enterText());
-        player.welcome();
+        player.descriptionCharacter();
 
         // Создание мира
-        Level level = new Level(random(10));
+        Level level = new Level(setRandom(10));
         // Движение
         player.go(10, level);
         // Создание врага
@@ -69,33 +69,33 @@ public class Game {
 
 
 
-    public static int random(int limit){
+    public static int setRandom(int limit){
         double roll = Math.random() * limit;
         return (int) roll;
     }
 
     public static void playerBeatsEnemy(Player player, Enemy enemy){
-        int damage = (player.getStrength() * random(6));
-        print(blue("Ты наносишь урон врагу: ") + green(Integer.toString(damage)));
+        int damage = (player.getStrength() * setRandom(6));
+        print(blueText("Ты наносишь урон врагу: ") + greenText(Integer.toString(damage)));
         enemy.setHealth(enemy.getHealth() - damage);
-        print(blue("Здоровье врага: ") + red(Integer.toString(enemy.getHealth())));
+        print(blueText("Здоровье врага: ") + redText(Integer.toString(enemy.getHealth())));
     }
 
     public static void enemyBeatsPlayer(Player player, Enemy enemy){
-        int damage = (enemy.getStrength() * random(6));
-        print(blue("Враг наносит тебе урон: ") + red(Integer.toString(damage)));
+        int damage = (enemy.getStrength() * setRandom(6));
+        print(blueText("Враг наносит тебе урон: ") + redText(Integer.toString(damage)));
         player.setHealth(player.getHealth() - damage);
-        print(blue("Твое здоровье: ") + green(Integer.toString(player.getHealth())));
+        print(blueText("Твое здоровье: ") + greenText(Integer.toString(player.getHealth())));
     }
 
     public static void fight(Player player, Enemy enemy){
-        System.out.println(blue("Твое здоровье: ")  + green(Integer.toString(player.getHealth())));
-        System.out.println(blue("Здоровье врага: ")  + red(Integer.toString(enemy.getHealth())));
+        System.out.println(blueText("Твое здоровье: ")  + greenText(Integer.toString(player.getHealth())));
+        System.out.println(blueText("Здоровье врага: ")  + redText(Integer.toString(enemy.getHealth())));
         while (enemy.getHealth() > 0 || player.getHealth() > 0){
             playerBeatsEnemy(player,enemy);
             if (enemy.getHealth() <= 0){
                 if (enemy.getHealth() <= 0) {
-                    print(green("Враг мертв!"));
+                    print(greenText("Враг мертв!"));
                     break;
                 }
                 break;
@@ -105,7 +105,7 @@ public class Game {
 
             if (player.getHealth() <= 0){
                 if (player.getHealth() <= 0){
-                    print(red("Ты мертв!"));
+                    print(redText("Ты мертв!"));
                     break;
                 }
                 break;
@@ -113,17 +113,17 @@ public class Game {
         }
     }
 
-    public static String red(String text){
+    public static String redText(String text){
         String textColor = "\u001B[31m" + text + "\u001B[0m";
         return textColor;
     }
 
-    public static String green(String text){
+    public static String greenText(String text){
         String textColor = "\u001B[32m" + text + "\u001B[0m";
         return textColor;
     }
 
-    public static String blue(String text){
+    public static String blueText(String text){
         String textColor = "\u001B[34m" + text + "\u001B[0m";
         return textColor;
     }

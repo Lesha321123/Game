@@ -1,10 +1,8 @@
 package Player;
 
 
-import Game.Game;
 import Game.Level;
-
-import static Game.Game.blue;
+import static Game.Game.blueText;
 import  static Game.Game.print;
 
 
@@ -12,40 +10,34 @@ public abstract class Player {
 
 
     public String name = "Игрок";
-    public int strength = 0;
-    public int health = 0;
+    public int strength;
+    public int health;
     public String race = "раса";
 
-    Player (){
-    }
-    public Player(String race, int strength, int health){
-        this.race = race;
-        this.strength = strength;
-        this.health = health;
-    }
 
-    public void welcome(){
-        print(blue("Твое имя: ") + (getName()));
-        print(blue("Твоя раса: ") + (getRace()));
-        print(blue("Твоя сила: ") + (Integer.toString(getStrength())));
-        print(blue("Твое здоровье: ") + (Integer.toString(getHealth())));
+
+    public void descriptionCharacter(){
+        print(blueText("Твое имя: ") + (getName()));
+        print(blueText("Твоя раса: ") + (getRace()));
+        print(blueText("Твоя сила: ") + (Integer.toString(getStrength())));
+        print(blueText("Твое здоровье: ") + (Integer.toString(getHealth())));
         System.out.println();
     }
 
     public static int rollDice(int limit){
-        blue(("Бросаем кубик"));
+        blueText(("Бросаем кубик"));
         int result = (int) (( Math.random() * limit) + 1);
-        blue(("Выпало: ") + "\u001B[34m" + result + "\u001B[0m");
+        blueText(("Выпало: ") + "\u001B[34m" + result + "\u001B[0m");
         return result;
     }
 
     public static int go(int limit, Level level){
         int step = rollDice(limit);
-        print(blue(("Вы прошли на ") + step + (" клеток")));
+        print(blueText(("Вы прошли на ") + step + (" клеток")));
         if (step > level.getEnemyLocation()){
-            print(blue("Вы встретили врага"));
+            print(blueText("Вы встретили врага"));
         } else {
-            print(blue("Ничего не происходит"));
+            print(blueText("Ничего не происходит"));
         }
         return step;
     }
