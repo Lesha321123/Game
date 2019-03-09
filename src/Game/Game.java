@@ -12,8 +12,6 @@ import java.util.*;
 public class Game {
     public static void main(String[] args)   {
 
-
-
         // Создание персонажа
         Scanner in = new Scanner(System.in);
 
@@ -30,7 +28,8 @@ public class Game {
 
             catch (Exception e)
             {
-                red("Нужно ввести число от 1 до 3");
+                print(red("Нужно ввести число от 1 до 3"));
+
             }
                 switch (choice) {
                     case 1:
@@ -46,13 +45,13 @@ public class Game {
                         print("Выбрано: эльф");
                         break;
                     default:
-                        print("Значение должно быть от 1 до 3");
+                        print(red("Значение должно быть от 1 до 3"));
                         continue;
                 }
 
         }
 
-        System.out.println(blue("Введи имя персонажа"));
+        print(blue("Введи имя персонажа"));
         player.setName(enterText());
         player.welcome();
 
